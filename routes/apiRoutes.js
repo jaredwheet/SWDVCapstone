@@ -24,7 +24,7 @@ module.exports = function(app) {
 
   app.get("/api/sleepData/", function(req, res) {
     db.Sleep.findAll({})
-      .then(function(dbleep) {
+      .then(function(dbSleep) {
         res.json(dbSleep);
       });
   });

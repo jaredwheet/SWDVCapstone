@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Tables Page</title>
+  <title>Vitals Page</title>
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -18,9 +18,9 @@
   <div class="container">
 
     <div class="jumbotron">
-      <h1 class="text-center"><span class="fa fa-fire"></span> Feeding History</h1>
+      <h1 class="text-center"><span class="fa fa-fire"></span> Vitals History</h1>
       <hr>
-      <h2 class="text-center">Keep track of your baby's feeding progress
+      <h2 class="text-center">Keep track of your baby's height and weight!
     </div>
     </h2>
     <br>
@@ -32,7 +32,7 @@
       <!-- Current Tables in Use -->
       <div class="card">
         <div class="card-header">
-          <h4>Recent Eating Events</h4>
+          <h4>Vitals History</h4>
         </div>
         <div class="card-body">
           <ul id="tableList" class="list-group"></ul>
@@ -66,7 +66,7 @@
 
   function runFeedingQuery() {
     // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
-    $.ajax({ url: "/api/eatingData", method: "GET" })
+    $.ajax({ url: "/api/vitalsData", method: "GET" })
       .then(function (tableData) {
 
         // Here we then log the tableData to console, where it will show up as an object.
@@ -82,9 +82,9 @@
           var listItem = $("<li class='list-group-item mt-4'>");
 
           listItem.append(
-            $("<h4>").text("ID: " + tableData[i].id),
-            $("<h4>").text("Eating Start: " + tableData[i].timeStart),
-            $("<h4>").text("Eating End: " + tableData[i].timeEnd)
+            $("<h4>").text("Date & Time : " + tableData[i].timestamp),
+            $("<h4>").text("Height : " + tableData[i].height),
+            $("<h4>").text("Sleeping End: " + tableData[i].weight)
           );
 
           tableList.append(listItem);
