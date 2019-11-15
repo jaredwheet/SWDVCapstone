@@ -39,7 +39,7 @@ module.exports = function(app) {
   app.get("/api/vitalsData", function(req, res) {
     db.Vitals.findAll({})
       .then(function(dbVitals) {
-        res.json(dbPVitals);
+        res.json(dbVitals);
       });
   });
   // API POST Requests
