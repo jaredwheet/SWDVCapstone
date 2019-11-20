@@ -27,6 +27,17 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/vitals.html"));
   });
 
+  app.get("/home", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/home.html"));
+  });
+  app.get("/index/:username", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
+
+  app.get("/register", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/register.html"));
+  });
+
   // If no matching route is found default to home
   app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));

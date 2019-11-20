@@ -61,10 +61,7 @@ module.exports = function(app) {
       })
         .then(function(dbSleep) {
           res.json(dbSleep);
-        });
-  
-  
-    
+        });    
   });
 
   app.post("/api/eatingData", function(req, res) {
@@ -95,9 +92,22 @@ module.exports = function(app) {
     })
       .then(function(dbSleep) {
         res.json(dbSleep);
-      });
- 
-    
+      });    
+  });
+
+  app.post("/api/users", function(req, res) {
+    // // req.body is available since we're using the body parsing middleware 
+    console.log(req.body);
+    db.Register.create({
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email, 
+      babysName: req.body.babysName,
+      babysBirthday: req.body.babysBirthday
+    })
+      .then(function(dbSleep) {
+        res.json(dbSleep);
+      });    
   });
 
   // ---------------------------------------------------------------------------
