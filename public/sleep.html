@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Tables Page</title>
+  <title>Sleeping</title>
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -93,29 +93,30 @@
     $.get("/api/user_data").then(function (data) {
       $(".member-name").text(data.username);
       var username = data.username
+      console.log("username is: " + username)
 
       var sleepingDurations = []
       var graphDates = []
-      $.get("/api/sleepData/" + username, function (req, res) {
 
-      })
+      $.ajax({ url: "/api/sleepData/" + username, method: "GET" })
         .then(function (tableData) {
           if (tableData.length == false) {
             alert("You have not entered any sleep events.  Go back to the homepage to get started")
           } else if (tableData.length <= 10) {
-            var tableList = $(".sleep-table")
-            var listItem = $("<tr>");
+            for (var i = 0; i < tableData.length; i++) {
+              var tableList = $(".sleep-table")
+              var listItem = $("<tr>");
 
-            listItem.append(
-              $("<td>").text(tableData[i].timeStart),
-              $("<td>").text(tableData[i].timeEnd),
-              $("<td>").text(tableData[i].duration)
-            );
-            tableList.append(listItem);
-            ;
-            sleepingDurations.push(tableData[i].duration)
-            graphDates.push(tableData[i].date)
-            var ctx = document.getElementById('myChart');
+              listItem.append(
+                $("<td>").text(tableData[i].timeStart),
+                $("<td>").text(tableData[i].timeEnd),
+                $("<td>").text(tableData[i].duration)
+              );
+              tableList.append(listItem);
+              ;
+              sleepingDurations.push(tableData[i].duration)
+              graphDates.push(tableData[i].date)
+              var ctx = document.getElementById('myChart');
               var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -140,11 +141,12 @@
                   }
                 }
               });
+            }
           }
 
           else {
 
-            for (var i = tableData.length - 10; i < tableData.length; i++) {              
+            for (var i = tableData.length - 10; i < tableData.length; i++) {
 
               var tableList = $(".sleep-table")
               var listItem = $("<tr>");
