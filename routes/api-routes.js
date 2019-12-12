@@ -7,9 +7,9 @@ module.exports = function (app) {
     // If the user has valid login credentials, send them to the members page.
     // Otherwise the user will be sent an error
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
-    //     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    //     // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    //     // They won't get this or even be able to access this page if they aren't authed
+        //     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
+        //     // So we're sending the user back the route to the members page because the redirect will happen on the front end
+        //     // They won't get this or even be able to access this page if they aren't authed
         res.json("/members");
     });
 
@@ -59,9 +59,6 @@ module.exports = function (app) {
     });
 
     app.post("/api/eatingData", function (req, res) {
-        // req.body is available since we're using the body parsing middleware    
-        // eatingArray.push(req.body);
-        // res.json(true); 
         console.log(req.body);
         db.Eat.create({
             timeStart: req.body.timeStart,
@@ -88,10 +85,6 @@ module.exports = function (app) {
             });
     });
     app.post("/api/vitalsData", function (req, res) {
-        // // req.body is available since we're using the body parsing middleware    
-        //   vitalsArray.push(req.body);
-        //   res.json(true);   
-
         db.Vitals.create({
             time: req.body.timestamp,
             height: req.body.height,
@@ -115,14 +108,6 @@ module.exports = function (app) {
             });
     });
 
-
-    // app.get("/api/eatingData", function (req, res) {
-    //     db.Eat.findAll({})
-    //         .then(function (dbEat) {
-    //             res.json(dbEat);
-    //         });
-    // });
-
     app.get("/api/eatingData/:username", function (req, res) {
         var username = req.params.username
         console.log("Username " + username)
@@ -135,14 +120,6 @@ module.exports = function (app) {
                 res.json(dbEat);
             });
     });
-
-    // app.get("/api/vitalsData", function (req, res) {
-    //     db.Vitals.findAll({})
-    //         .then(function (dbVitals) {
-    //             res.json(dbVitals);
-    //         });
-    // });
-
     app.get("/api/vitalsData/:username", function (req, res) {
         var username = req.params.username
         console.log("Username " + username)
